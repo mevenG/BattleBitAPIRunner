@@ -15,6 +15,9 @@ ARG GID=1000
 RUN groupadd -g $GID -o $UNAME \
     && useradd -l -u $UID -g $GID -o -s /bin/bash $UNAME
 
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y wget unzip
+
 WORKDIR /app
 COPY --from=base --chown=$UID:$GID /app/bld /app
 COPY --chown=$UID:$GID docker/appsettings.json /app/appsettings.json
