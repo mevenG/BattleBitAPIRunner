@@ -30,6 +30,8 @@ RUN URL=$(curl -s $API_URL | grep -o 'https://github.com/[^"]*/releases/download
     wget $URL && \
     ZIP="$(find . -maxdepth 1 -name "*.zip")" && \
     unzip -qq $ZIP
+	
+RUN echo URL > version.txt
 
 # COPY --from=base --chown=$UID:$GID /app/bld /app
 COPY --chown=$UID:$GID docker/appsettings.json /app/appsettings.json
